@@ -88,7 +88,11 @@
             left: 26%;
             transform: translate(-50%, -50%);
             text-align: center;
-            color: pink; /* Tu color rosa/fucsia */
+            
+            /* 🌟 Mismas características de color y sombra que el título 🌟 */
+            color: #ffffff; 
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            
             font-size: 18px;
             font-weight: bold;
             z-index: 99999; /* 🔥 SIEMPRE ENCIMA */
@@ -96,17 +100,19 @@
             line-height: 1.4;
             pointer-events: none; 
             
-            /* Sombra */
-            text-shadow: 0 0 5px rgba(255,255,255,.5);
-            
             /* Llamamos a tu animación */
             animation: latido 2s infinite ease-in-out;
         }
 
         #texto-amor {
-            font-size: 13px;
-            margin-bottom: 5px;
-            opacity: 0.9;
+            font-size: 20px; /* Un poco más grande para asemejarse al título */
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        #contador {
+            font-size: 18px;
+            color: #ffffff; /* Mantiene la armonía cromática */
         }
 
         /* 💓 Tu efecto mágico de latido */
@@ -115,6 +121,8 @@
             50%  { transform: translate(-50%, -50%) scale(1.05); }
             100% { transform: translate(-50%, -50%) scale(1); }
         }
+
+        
     </style>
 </head>
 <body>
