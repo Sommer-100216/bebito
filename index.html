@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Proyecto Fijo Dinámico</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
     <style>
         /* ====================================================
            1. ESTILOS GENERALES Y LIENZO
@@ -80,7 +83,7 @@
         }
 
         /* ====================================================
-           3. 🔥 CONTADOR FIJO EXCLUSIVO CON LATIDO
+           3. 🔥 CONTADOR FIJO EXCLUSIVO CON LATIDO (ACTUALIZADO)
            ==================================================== */
         #contador-box {
             position: absolute;
@@ -89,16 +92,13 @@
             transform: translate(-50%, -50%);
             text-align: center;
             
-
-            /* Tipografia */
-            letter-spacing: 1px; /* Espaciado estilo reloj para todo el conjunto */
-            
-            /* Sombra */
-            color: #pink; 
+            /* 🌸 AQUÍ AGREGAMOS TUS CONFIGURACIONES EN PINK Y RELOJ DIGITAL 🌸 */
+            color: pink; 
+            font-family: 'Share Tech Mono', monospace; 
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            letter-spacing: 1px; 
             
-            font-size: 16px;
-            font-family: 'Share Tech Mono', monospace; /* Aplica a texto-amor y a contador */
+            font-size: 18px;
             font-weight: bold;
             z-index: 99999; /* 🔥 SIEMPRE ENCIMA */
             padding: 10px 15px;
@@ -117,7 +117,6 @@
 
         #contador {
             font-size: 18px;
-            color: #ffffff; /* Mantiene la armonía cromática */
         }
 
         /* 💓 Tu efecto mágico de latido */
@@ -126,8 +125,6 @@
             50%  { transform: translate(-50%, -50%) scale(1.05); }
             100% { transform: translate(-50%, -50%) scale(1); }
         }
-
-        
     </style>
 </head>
 <body>
@@ -137,7 +134,7 @@
         <img id="fondo-dinamico" class="imagen-fondo" src="" alt="Fondo Dinámico">
 
         <div id="contador-box" class="elemento-fijo">
-            <div id="texto-amor"><i>Mi amor a ti inicio hace:</i></div>
+            <div id="texto-amor">Mi amor a ti inicio hace:</div>
             <div id="contador"></div>
         </div>
 
