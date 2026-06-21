@@ -9,6 +9,24 @@ function actualizarFondoPorHora() {
 
     // 2. Definimos las variables para la imagen seleccionada
     let imagenFondo = "[6]_noche.jpg"; // Por defecto la noche (así cubre la madrugada hasta las 5:29)
+    // 
+    /* 🔥 CONTADOR FIJO EXCLUSIVO */
+#contador-box {
+    position: absolute;
+    top: 55%;
+    left: 52%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #c03a6b; /* Tu color rosa/fucsia personalizado */
+    font-size: 18px;
+    font-family: inherit; /* Hereda la tipografía limpia del proyecto */
+    font-weight: bold;
+    z-index: 99999; /* 🔥 SIEMPRE ENCIMA */
+    padding: 10px 15px;
+    line-height: 1.4;
+    pointer-events: none; /* Opcional: hace que los clics pasen a través del texto si estorba a un botón */
+}
+
 
     // Helper para convertir formato HH:MM a minutos totales
     const aMinutos = (h, m) => (h * 60) + m;
