@@ -1,8 +1,8 @@
 /* 1. Contenedor con las medidas EXACTAS de tu imagen */
 .contenedor-bloqueado {
     position: relative;
-    width: 1152px;  /* Tu ancho exacto */
-    height: 922px;  /* Tu alto exacto */
+    width: 1080px;  /* Tu ancho exacto */
+    height: 850px;  /* Tu alto exacto */
     margin: 0 auto; /* Centra el lienzo en la pantalla del navegador */
     box-sizing: border-box;
 }
