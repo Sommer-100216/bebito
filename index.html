@@ -4,7 +4,115 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Proyecto Fijo Dinámico</title>
-    <link rel="stylesheet" href="estilo.css">
+    <style>
+        /* ====================================================
+           1. ESTILOS GENERALES Y LIENZO
+           ==================================================== */
+        body {
+            background-color: #121212;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Contenedor con tus medidas fijas */
+        .contenedor-bloqueado {
+            position: relative;
+            width: 1080px;  /* Tu ancho exacto */
+            height: 850px;  /* Tu alto exacto */
+            margin: 0 auto; 
+            box-sizing: border-box;
+            background-color: #1a1a1a; /* Fondo de respaldo */
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-radius: 8px;
+        }
+
+        /* La imagen se acopla por completo al contenedor */
+        .imagen-fondo {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        /* Regla de oro para congelar elementos en su lugar */
+        .elemento-fijo {
+            position: absolute;
+            box-sizing: border-box; 
+        }
+
+        /* ====================================================
+           2. COORDENADAS DE LOS ELEMENTOS EN PANTALLA
+           ==================================================== */
+        #texto-titulo {
+            top: 80px;        
+            left: 120px;      
+            font-size: 28px;
+            font-weight: bold;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        #caja-entrada {
+            top: 450px;       
+            left: 120px;
+            width: 300px;
+            padding: 10px;
+            border-radius: 6px;
+            border: 2px solid #333333;
+            font-size: 16px;
+        }
+
+        #boton-enviar {
+            top: 450px;
+            left: 440px;      
+            padding: 11px 25px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* ====================================================
+           3. 🔥 CONTADOR FIJO EXCLUSIVO CON LATIDO
+           ==================================================== */
+        #contador-box {
+            position: absolute;
+            top: 55%;
+            left: 52%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #c03a6b; /* Tu color rosa/fucsia */
+            font-size: 18px;
+            font-weight: bold;
+            z-index: 99999; /* 🔥 SIEMPRE ENCIMA */
+            padding: 10px 15px;
+            line-height: 1.4;
+            pointer-events: none; 
+            
+            /* Llamamos a tu animación */
+            animation: latido 2s infinite ease-in-out;
+        }
+
+        #texto-amor {
+            font-size: 16px;
+            margin-bottom: 5px;
+            opacity: 0.9;
+        }
+
+        /* 💓 Tu efecto mágico de latido */
+        @keyframes latido {
+            0%   { transform: translate(-50%, -50%) scale(1); }
+            50%  { transform: translate(-50%, -50%) scale(1.05); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+    </style>
 </head>
 <body>
 
@@ -17,15 +125,71 @@
             <div id="contador"></div>
         </div>
 
-
-        
         <div id="texto-titulo" class="elemento-fijo">Este texto no se moverá</div>
         <input type="text" id="caja-entrada" class="elemento-fijo" placeholder="Escribe aquí...">
         <button id="boton-enviar" class="elemento-fijo">Enviar</button>
         
     </div>
 
-    <script src="script.js"></script>
-    <script src="contador.js"></script>
+    <script>
+        // --- SCRIPT 1: CONTROL DE FONDOS POR HORA (ENSENADA) ---
+        function obtenerImagenPorHora() {
+            const opciones = { timeZone: 'America/Tijuana', hour: '2-digit', minute: '2-digit', hour12: false };
+            const horaLocal = new Intl.DateTimeFormat('es-MX', opciones).format(new Date());
+            const [horas, minutos] = horaLocal.split(':').map(Number);
+            const minutosTotales = (horas * 60) + minutos;
+
+            const aMinutos = (h, m) => (h * 60) + m;
+
+            if (minutosTotales >= aMinutos(5, 30) && minutosTotales < aMinutos(7, 30)) return "[1]_amanecer.jpg";
+            if (minutosTotales >= aMinutos(7, 30) && minutosTotales < aMinutos(11, 30)) return "[2]_dia.jpg";
+            if (minutosTotales >= aMinutos(11, 30) && minutosTotales < aMinutos(14, 59)) return "[3]_mediodia.jpg";
+            if (minutosTotales >= aMinutos(15, 0) && minutosTotales < aMinutos(17, 29)) return "[4]_tarde.jpg";
+            if (minutosTotales >= aMinutos(17, 30) && minutosTotales < aMinutos(19, 29)) return "[5]_atardecer.jpg";
+            return "[6]_noche.jpg"; 
+        }
+
+        function actualizarFondo() {
+            const imgElemento = document.getElementById('fondo-dinamico');
+            if (imgElemento) {
+                const archivoFondo = obtenerImagenPorHora();
+                imgElemento.src = `main-time/${archivoFondo}`;
+            }
+        }
+
+        // --- SCRIPT 2: TU CONTADOR DE TIEMPO TRANSCURRIDO ---
+        const inicio = new Date("2025-11-10T01:30:00-05:00");
+
+        function actualizarContador() {
+            const ahora = new Date();
+            let diff = Math.floor((ahora - inicio) / 1000);
+
+            const d = Math.floor(diff / 86400);
+            diff %= 86400;
+
+            const h = Math.floor(diff / 3600);
+            diff %= 3600;
+
+            const m = Math.floor(diff / 60);
+            const s = diff % 60;
+
+            const el = document.getElementById("contador");
+            if (el) {
+                el.innerHTML =
+                    `${d} días ${h} horas <br>` +
+                    `${m} minutos ${s} segundos`;
+            }
+        }
+
+        // --- INICIALIZACIÓN DE TODO ---
+        window.onload = () => {
+            actualizarFondo();
+            actualizarContador();
+            
+            // Relojes en segundo plano
+            setInterval(actualizarFondo, 60000); // Revisa el fondo cada minuto
+            setInterval(actualizarContador, 1000); // Actualiza los segundos del amor en tiempo real
+        };
+    </script>
 </body>
 </html>
