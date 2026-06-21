@@ -13,13 +13,13 @@ function actualizarFondoPorHora() {
     /* 🔥 CONTADOR FIJO EXCLUSIVO */
 #contador-box {
     position: absolute;
-    top: 55%;
-    left: 52%;
+    top: 37%;
+    left: 35%;
     transform: translate(-50%, -50%);
     text-align: center;
     color: #c03a6b; /* Tu color rosa/fucsia personalizado */
     font-size: 18px;
-    font-family: inherit; /* Hereda la tipografía limpia del proyecto */
+    font-family: inherit; 
     font-weight: bold;
     z-index: 99999; /* 🔥 SIEMPRE ENCIMA */
     padding: 10px 15px;
